@@ -25,21 +25,24 @@ function toID(x, y) {
 // Set listening events for pixels
 var pixelCells = document.getElementsByClassName("grid");
 for (k=0; k<pixelCells.length; k++) {
-    pixelCells[k].onclick = togglePixel;
+    pixelCells[k].onmousedown = togglePixel;
+    pixelCells[k].onmouseover = togglePixel;
 }
 
 // Select or deselect pixel and update pixel array
-function togglePixel() {
+function togglePixel(e) {
     var pixelID = this.id;
     var pixelCoordinate = toCoordinate(pixelID);
     var pixelCell = document.getElementById(pixelID);
 
-    if (pixelCell.style.backgroundColor == "black") {
-        pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "0";
-        pixelCell.style.backgroundColor = "white";
-    }
-    else {
-        pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "1";
-        pixelCell.style.backgroundColor = "black";
+    if (e.buttons === 1) {
+        if (pixelCell.style.backgroundColor === "black") {
+            pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "0";
+            pixelCell.style.backgroundColor = "white";
+        }
+        else {
+            pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "1";
+            pixelCell.style.backgroundColor = "black";
+        }
     }
 }
