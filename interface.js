@@ -30,19 +30,33 @@ for (k=0; k<pixelCells.length; k++) {
 }
 
 // Select or deselect pixel and update pixel array
+var selected = false;
 function togglePixel(e) {
     var pixelID = this.id;
     var pixelCoordinate = toCoordinate(pixelID);
     var pixelCell = document.getElementById(pixelID);
-
-    if (e.buttons === 1) {
+    if (e.type === "mouseover") {
+        if (e.buttons === 1) {
+            if (selected) {
+                pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "1";
+                pixelCell.style.backgroundColor = "black";
+            }
+            else {
+                pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "0";
+                pixelCell.style.backgroundColor = "white";
+            }
+        }
+    }
+    else {
         if (pixelCell.style.backgroundColor === "black") {
             pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "0";
             pixelCell.style.backgroundColor = "white";
+            selected = false;
         }
         else {
             pixels[pixelCoordinate[0]][pixelCoordinate[1]] = "1";
             pixelCell.style.backgroundColor = "black";
+            selected = true;
         }
     }
 }
