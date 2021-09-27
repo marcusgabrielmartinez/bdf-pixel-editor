@@ -1,7 +1,6 @@
-
 #grid-section {
     position: relative;
-    left: 30%;
+    left: 10%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -14,4 +13,9 @@ div.grid {
     width: 2rem;
     border: 1px solid black;
     margin: 0;
+}
+
+#font_div {
+    position: relative;
+    left: 60%;
 }
