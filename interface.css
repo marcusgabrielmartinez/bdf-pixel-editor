@@ -19,3 +19,7 @@ div.grid {
     position: relative;
     left: 60%;
 }
+
+#font_output {
+    resize: both;
+}
