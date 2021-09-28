@@ -14,15 +14,27 @@ function buildPixels() {
 
 // Translate pixel ID into array coordinate
 function toCoordinate(id_num) {
-    id_num = parseInt(id_num);
-    var x = Math.floor(id_num/16);
-    var y = id_num-(16*x);
-    return [x, y-1];
+    // Math doesnn't work properly for last cell
+    if (id_num === "256") {
+        return [15, 15];
+    }
+    else {
+        id_num = parseInt(id_num);
+        var x = Math.floor(id_num/16);
+        var y = id_num-(16*x);
+        return [x, y-1];
+    }
 }
 
 // Translate array coordinate into pixel ID.
 function toID(x, y) {
-    return (16*x)+(y+1);
+    // Math doesn't work properly for last cell
+    if (x === "15" && y === "15") {
+        return 256;
+    }
+    else {
+        return (16*x)+(y+1);
+    }
 }
 
 // Listen for glyph assignment and create/update glyphs
@@ -95,6 +107,48 @@ function togglePixel(e) {
             pixelCell.style.backgroundColor = "black";
             selected = true;
         }
+    }
+}
+
+// Add glyph
+var addButton = document.getElementById("add_button");
+var newGlyph = document.getElementById("new_glyph");
+addButton.onclick = addGlyph;
+function addGlyph() {
+    // Add glyph option to select box
+    if (isNaN(parseInt(newGlyph.value))) {
+        var newID = newGlyph.value;
+    }
+    else {
+        var newID = "font_" + newGlyph.value;
+    }
+    if (drawnGlyphs[newID] === undefined) {
+        var newOption = document.createElement("option");
+        newOption.id = newID;
+        newOption.innerHTML = newGlyph.value;
+        glyphBox.appendChild(newOption);
+        newGlyph.value = "";
+
+        // Add glyph to list of pixels
+        drawnGlyphs[newID] = buildPixels();
+    }
+}
+
+// Remove glyph
+var removeButton = document.getElementById("remove_button");
+removeButton.onclick = removeGlyph;
+function removeGlyph() {
+    // Remove glyph option from select box
+    glyphBox.remove(glyphBox.selectedIndex);
+
+    // Remove glyph from list of pixels
+    drawnGlyphs[selectedGlyph.id] = undefined;
+
+    // Reset pixels to white
+    var o;
+    for (o=1; o<=256; o++) {
+        var curPixelCell = document.getElementById(o.toString());
+        curPixelCell.style.backgroundColor = "white";
     }
 }
 
