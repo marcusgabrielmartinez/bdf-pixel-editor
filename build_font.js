@@ -1,6 +1,9 @@
-// Listen for export event and collect filename
+// Listen for import/export events and collect font element
 var exportButton = document.getElementById("export_button");
 exportButton.onclick = buildFont;
+var importButton = document.getElementById("import_button");
+importButton.onclick = importFont;
+var fontArea = document.getElementById("font_area");
 
 // Build data for individual glyph
 function buildGlyph(curGlyph, encoding) {
@@ -49,6 +52,41 @@ function buildFont() {
 
     fileContents += "ENDFONT"
 
-    var outputArea = document.getElementById("font_output");
-    outputArea.innerHTML = fileContents;
+    fontArea.innerHTML = fileContents;
+}
+
+// Import bdf file
+function importFont() {
+    clearAllGlyphs();
+    var importedContents = fontArea.value.split("\n");
+    var t;
+    var relevant = false;
+    for (t=0; t<importedContents; t++) {
+        var charName;
+        var isBitmap = false;
+        if (importedContents[t] === "ENDFONT") {
+            relevant = false;
+        }
+        if (relevant) {
+            if (importedContents[t] === "BITMAP") {
+                var pixels = [];
+                isBitmap = true;
+            }
+            if (isBitmap) {
+                if (importedContents[t] === "ENDCHAR") {
+                    isBitmap = false;
+                    drawnGlyphs[charName] = pixels;
+                }
+                else {
+                    var pixelRow = importedContents[t];
+                    pixelRow = (parseInt(pixels, 16).toString(2)).padStart(16, '0');
+                    pixels.push(pixelRow.split());
+                }
+            }
+        }
+        if (importedContents[t].split(" ")[0] === "STARTCHAR") {
+            charName = importedContents[t].split(" ")[1];
+            relevant = true;
+        }
+    }
 }
