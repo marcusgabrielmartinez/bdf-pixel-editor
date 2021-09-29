@@ -1,14 +1,6 @@
 // Listen for export event and collect filename
 var exportButton = document.getElementById("export_button");
 exportButton.onclick = buildFont;
-//var filenameElement = document.getElementById("filename");
-//var filename;
-//if (filenameElement === "") {
-//    filename = "myfont.bdf";
-//}
-//else {
-//    filename = filenameElement.value+".bdf"
-//}
 
 // Build data for individual glyph
 function buildGlyph(curGlyph, encoding) {

@@ -152,3 +152,23 @@ function removeGlyph() {
     }
 }
 
+// Remove all glyphs
+var clearButton = document.getElementById("clear_all");
+clearButton.onclick = clearAllGlyphs;
+function clearAllGlyphs() {
+    var r;
+    for (r=glyphBox.length-1; r>=0; r--) {
+        // Remove glyph from list of pixels
+        drawnGlyphs[glyphBox[r].id] = undefined;
+        // Remove glyph option from select box
+        glyphBox.remove(r);
+    }
+
+    // Reset pixels to white
+    var s;
+    for (s=1; s<=256; s++) {
+        var curPixelCell = document.getElementById(s.toString());
+        curPixelCell.style.backgroundColor = "white";
+    }
+}
+
