@@ -5,6 +5,8 @@ var importButton = document.getElementById("import_button");
 importButton.onclick = importFont;
 var copyButton = document.getElementById("copy_button");
 copyButton.onclick = copyFont;
+var clearButton = document.getElementById("clear_button");
+clearButton.onclick = clearFont;
 var fontArea = document.getElementById("font_area");
 
 // Build data for individual glyph
@@ -131,4 +133,9 @@ function importFont() {
 // Copy text of font file
 function copyFont() {
     navigator.clipboard.writeText(fontArea.value);
+}
+
+// Clear font from text field
+function clearFont() {
+    fontArea.value = "";
 }
