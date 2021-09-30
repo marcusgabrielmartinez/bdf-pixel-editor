@@ -3,6 +3,8 @@ var exportButton = document.getElementById("export_button");
 exportButton.onclick = buildFont;
 var importButton = document.getElementById("import_button");
 importButton.onclick = importFont;
+var copyButton = document.getElementById("copy_button");
+copyButton.onclick = copyFont;
 var fontArea = document.getElementById("font_area");
 
 // Build data for individual glyph
@@ -41,7 +43,7 @@ function buildFont() {
         + "FONTBOUNDINGBOX 16 16 0 -2\n"
         + "STARTPROPERTIES 2\n"
         + "FONT_ASCENT 12\n"
-        + "FONT_DESCEnT 4\n"
+        + "FONT_DESCENT 4\n"
         + "ENDPROPERTIES\n"
         + "CHARS " + glyphsNum + "\n";
     
@@ -54,6 +56,28 @@ function buildFont() {
     fileContents += "ENDFONT"
 
     fontArea.innerHTML = fileContents;
+}
+
+// Check if font loaded correctly
+function checkFont() {
+    for (glyph in drawnGlyphs) {
+        if (drawnGlyphs[glyph].length === 16) {
+            var t;
+            for (t=0; t<16; t++) {
+                if (drawnGlyphs[glyph][t].length === 16) {
+                    continue;
+                }
+                else {
+                    alert("Font not loaded correctly!");
+                    return false;
+                }
+            }
+        }
+        else {
+            alert("Font not loaded correctly!");
+            return false;
+        }
+    }
 }
 
 // Import bdf file
@@ -99,4 +123,12 @@ function importFont() {
             relevant = true;
         }
     }
+    if (!checkFont()){
+        clearAllGlyphs();
+    }
+}
+
+// Copy text of font file
+function copyFont() {
+    navigator.clipboard.writeText(fontArea.value);
 }
