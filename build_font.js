@@ -17,12 +17,13 @@ function buildGlyph(curGlyph, encoding) {
     var bitmap = drawnGlyphs[curGlyph];
     var q;
     for (q=0; q<16; q++) {
-        var byte1 = bitmap[q].slice(0,9).join("");
+        var byte1 = bitmap[q].slice(0,8).join("");
         byte1 = parseInt(byte1, 2).toString(16);
         var byte2 = bitmap[q].slice(9).join("");
         byte2 = parseInt(byte2, 2).toString(16);
+        var hex = byte1.padStart(2, "0")+byte2.padStart(2, "0");
 
-        glyphContents += byte1 + byte2 + "\n"
+        glyphContents += hex + "\n"
     }
     
     glyphContents += "ENDCHAR\n"
@@ -61,9 +62,9 @@ function importFont() {
     var importedContents = fontArea.value.split("\n");
     var t;
     var relevant = false;
-    for (t=0; t<importedContents; t++) {
+    var isBitmap = false;
+    for (t=0; t<importedContents.length; t++) {
         var charName;
-        var isBitmap = false;
         if (importedContents[t] === "ENDFONT") {
             relevant = false;
         }
@@ -71,21 +72,30 @@ function importFont() {
             if (importedContents[t] === "BITMAP") {
                 var pixels = [];
                 isBitmap = true;
+                continue;
             }
             if (isBitmap) {
                 if (importedContents[t] === "ENDCHAR") {
                     isBitmap = false;
                     drawnGlyphs[charName] = pixels;
+                    var newOption = document.createElement("option");
+                    newOption.id = charName;
+                    newOption.innerHTML = charName;
+                    glyphBox.appendChild(newOption);
                 }
                 else {
-                    var pixelRow = importedContents[t];
-                    pixelRow = (parseInt(pixels, 16).toString(2)).padStart(16, '0');
-                    pixels.push(pixelRow.split());
+                    var pixelRow = importedContents[t].split("");
+                    var s;
+                    for (s=0; s<pixelRow.length; s++) {
+                        pixelRow[s] = parseInt(pixelRow[s], 16).toString(2).padStart(4, "0");
+                    }
+                    pixelRow = pixelRow.join("");
+                    pixels.push(pixelRow.split(""));
                 }
             }
         }
         if (importedContents[t].split(" ")[0] === "STARTCHAR") {
-            charName = importedContents[t].split(" ")[1];
+            charName = importedContents[t].split(" ")[1].slice(-1);
             relevant = true;
         }
     }
