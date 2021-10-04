@@ -1,3 +1,8 @@
+#parent_div {
+    display: flex;
+    flex-direction: row;
+}
+
 #grid-section {
     position: relative;
     left: 10%;
@@ -6,6 +11,7 @@
     flex-direction: row;
     width: 34rem;
     height: 34rem;
+    border: 2px solid black;
 }
 
 div.grid {
@@ -15,9 +21,29 @@ div.grid {
     margin: 0;
 }
 
+select {
+    font-size: 25;
+    border: 2px solid black;
+}
+
+#new_glyph {
+    border: 2px solid black;
+}
+
+#font_area {
+    height: 334px;
+    width: 330px;
+    border: 2px solid black;
+}
+
+#glyph_div {
+    position: relative;
+    left: 15%;
+}
+
 #font_div {
     position: relative;
-    left: 60%;
+    left: 18%;
 }
 
 #font_output {
