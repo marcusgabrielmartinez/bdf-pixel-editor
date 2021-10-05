@@ -137,5 +137,5 @@ function copyFont() {
 
 // Clear font from text field
 function clearFont() {
-    fontArea.value = "";
+    fontArea.innerHTML = "";
 }

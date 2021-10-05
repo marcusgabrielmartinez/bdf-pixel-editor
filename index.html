@@ -6,7 +6,30 @@
         <link rel="stylesheet" type="text/css" href="interface.css">
     </head>
 
-    <p> <b> .bdf Pixel Editor </b> </p>
+    <p id="title"> <b> .bdf Pixel Editor </b> </p>
+    <p>
+        <b> Exporting Fonts </b><br>
+
+        This interactive editor will let you create fonts where each glyph (character or symbol) is built pixel by pixel. 
+        In order to use it, click on a glyph and then draw it in the editor on the left. Repeat this for every desired
+        glyph and then press "Export Font" and the .bdf file contents will appear in the text box on the far right. 
+        Use the "Copy Font" to copy the contents to your clipboard. Copy this into a text editor and save the file with a
+        .bdf extension.
+    </p>
+    <p>
+        <b> Editing Glyph List </b><br> 
+        Please note that any glyph that is not drawn, but remains in the list of glyphs will be preserved
+        in the .bdf file contents. If you do not want the glyph in your file, use the "-" button to remove it once it is
+        selected. If you'd like to add back the glyph, or add a new one, type the glyph in the text box below the glyph
+        list and use the "+" button. If you'd like to remove all glyphs at once, use the "Clear All" button.
+    </p>
+    <p>
+        <b> Importing Fonts </b><br>
+        If you'd like to import an existing font, paste the contents of your .bdf file and click the "Import Font" button.
+        Please note that this font editor is limited to 16pt fonts with a 16x16 bounding box. Attempting to import a font
+        that does not fit into these specs will result in the font not loading correctly. In addition, any incorrectly
+        written font will not load correctly and will result in a message from the system.
+    </p>
     <div id="parent_div">
         <div id="grid-section">
             <div class="grid" id="1"></div>
