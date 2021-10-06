@@ -78,15 +78,15 @@ function loadGlyph(e) {
     // Set listening events for pixels
     var pixelCells = document.getElementsByClassName("grid");
     for (k=0; k<pixelCells.length; k++) {
-        pixelCells[k].onmousedown = togglePixel;
-        pixelCells[k].onmouseover = togglePixel;
+        pixelCells[k].onmousedown = function (e) {e.preventDefault(); togglePixel(e, this.id);};
+        pixelCells[k].onmouseover = function (e) {togglePixel(e, this.id);};
     }
 }
 
 // Select or deselect pixel and update pixel array
 var selected = false;
-function togglePixel(e) {
-    var pixelID = this.id;
+function togglePixel(e, pixelID) {
+    //var pixelID = this.id;
     var pixelCoordinate = toCoordinate(pixelID);
     var pixelCell = document.getElementById(pixelID);
     var pixels = drawnGlyphs[selectedGlyph.id]
