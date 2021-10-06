@@ -26,7 +26,7 @@ function toCoordinate(id_num) {
     }
     else {
         id_num = parseInt(id_num);
-        var x = Math.floor(id_num/16);
+        var x = Math.floor((id_num-1)/16);
         var y = id_num-(16*x);
         return [x, y-1];
     }

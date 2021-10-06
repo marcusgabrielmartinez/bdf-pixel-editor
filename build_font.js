@@ -23,7 +23,7 @@ function buildGlyph(curGlyph) {
     for (q=0; q<16; q++) {
         var byte1 = bitmap[q].slice(0,8).join("");
         byte1 = parseInt(byte1, 2).toString(16);
-        var byte2 = bitmap[q].slice(9).join("");
+        var byte2 = bitmap[q].slice(8).join("");
         byte2 = parseInt(byte2, 2).toString(16);
         var hex = byte1.padStart(2, "0")+byte2.padStart(2, "0");
 
@@ -44,8 +44,8 @@ function buildFont() {
         + "SIZE 16 75 75\n"
         + "FONTBOUNDINGBOX 16 16 0 -2\n"
         + "STARTPROPERTIES 2\n"
-        + "FONT_ASCENT 12\n"
-        + "FONT_DESCENT 4\n"
+        + "FONT_ASCENT 14\n"
+        + "FONT_DESCENT 2\n"
         + "ENDPROPERTIES\n"
         + "CHARS " + glyphsNum + "\n";
     
@@ -55,7 +55,9 @@ function buildFont() {
 
     fileContents += "ENDFONT"
 
-    fontArea.innerHTML = fileContents;
+    if (checkFont) {
+        fontArea.innerHTML = fileContents;
+    }
 }
 
 // Check if font loaded correctly
