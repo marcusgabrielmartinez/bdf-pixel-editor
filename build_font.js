@@ -10,9 +10,9 @@ clearButton.onclick = clearFont;
 var fontArea = document.getElementById("font_area");
 
 // Build data for individual glyph
-function buildGlyph(curGlyph, encoding) {
+function buildGlyph(curGlyph) {
     var glyphContents = "STARTCHAR " + curGlyph.slice(-1) + "\n"
-        + "ENCODING " + encoding + "\n"
+        + "ENCODING " + curGlyph.slice(-1).charCodeAt(0) + "\n"
         + "SWIDTH 1000 0\n"
         + "DWIDTH 16 0\n"
         + "BBX 16 16 0 -2\n"
@@ -49,10 +49,8 @@ function buildFont() {
         + "ENDPROPERTIES\n"
         + "CHARS " + glyphsNum + "\n";
     
-    var encodingNum = 0;
     for (const glyph in drawnGlyphs) {
-        fileContents += buildGlyph(glyph, encodingNum);
-        encodingNum++;
+        fileContents += buildGlyph(glyph);
     }
 
     fileContents += "ENDFONT"
@@ -80,6 +78,7 @@ function checkFont() {
             return false;
         }
     }
+    return true;
 }
 
 // Import bdf file
