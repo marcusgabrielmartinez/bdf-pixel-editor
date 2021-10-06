@@ -12,6 +12,12 @@ function buildPixels() {
     return pixels;
 }
 
+// Make existig pixels non-draggable
+for (u=1; u<=256; u++) {
+    var curPixelCell = document.getElementById(u.toString());
+    curPixelCell.draggable = false;
+}
+
 // Translate pixel ID into array coordinate
 function toCoordinate(id_num) {
     // Math doesnn't work properly for last cell
@@ -142,7 +148,7 @@ function removeGlyph() {
     glyphBox.remove(glyphBox.selectedIndex);
 
     // Remove glyph from list of pixels
-    drawnGlyphs[selectedGlyph.id] = undefined;
+    delete drawnGlyphs[selectedGlyph.id];
 
     // Reset pixels to white
     var o;
@@ -154,15 +160,16 @@ function removeGlyph() {
 
 // Remove all glyphs
 var clearButton = document.getElementById("clear_all");
-clearButton.onclick = clearAllGlyphs;
+clearButton.onclick = function () {fontArea.innerHTML=""; clearAllGlyphs();};
 function clearAllGlyphs() {
     var r;
     for (r=glyphBox.length-1; r>=0; r--) {
-        // Remove glyph from list of pixels
-        drawnGlyphs[glyphBox[r].id] = undefined;
         // Remove glyph option from select box
         glyphBox.remove(r);
     }
+
+    // Reset glyphs array and font area
+    drawnGlyphs = {};
 
     // Reset pixels to white
     var s;
@@ -171,4 +178,8 @@ function clearAllGlyphs() {
         curPixelCell.style.backgroundColor = "white";
     }
 }
+
+// Automatically selecting first glyph on load
+glyphBox.value = "!";
+glyphBox.dispatchEvent(new Event("change"));
 

@@ -11,7 +11,7 @@ var fontArea = document.getElementById("font_area");
 
 // Build data for individual glyph
 function buildGlyph(curGlyph, encoding) {
-    var glyphContents = "STARTCHAR " + curGlyph + "\n"
+    var glyphContents = "STARTCHAR " + curGlyph.slice(-1) + "\n"
         + "ENCODING " + encoding + "\n"
         + "SWIDTH 1000 0\n"
         + "DWIDTH 16 0\n"
