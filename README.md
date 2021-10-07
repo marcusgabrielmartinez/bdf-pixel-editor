@@ -6,23 +6,23 @@ The Glyph Bitmap Distribution format is an older font format that is largely uns
 Because this format is rarely used now, very few tools are still available to develop such fonts. This project offers one such tool
 for a limited 16pt font, with a 16x16 bounding box. The global properties of the font this system creates are as follows.<br>
 
-STARTFONT 2.1
-FONT -gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1
-SIZE 16 75 75
-FONTBOUNDINGBOX 16 16 0 -2
-STARTPROPERTIES 2
-FONT_ASCENT 14
-FONT_DESCENT 2
-ENDPROPERTIES
+STARTFONT 2.1<br>
+FONT -gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1<br>
+SIZE 16 75 75<br>
+FONTBOUNDINGBOX 16 16 0 -2<br>
+STARTPROPERTIES 2<br>
+FONT_ASCENT 14<br>
+FONT_DESCENT 2<br>
+ENDPROPERTIES<br>
 CHARS 91<br>
 
 Each glyph has a preamble like the following (with STARTCHAR and ENCODING different for each glyph).<br>
 
-STARTCHAR !
-ENCODING 33
-SWIDTH 1000 0
-DWIDTH 16 0
-BBX 16 16 0 -2
+STARTCHAR !<br>
+ENCODING 33<br>
+SWIDTH 1000 0<br>
+DWIDTH 16 0<br>
+BBX 16 16 0 -2<br>
 BITMAP<br>
 
 Each line after BITMAP and before ENDCHAR is a hexadecimal representation of two bytes that repreesnt each line of pixels. Each of the 16 bits is either 
