@@ -4,7 +4,7 @@ See the system running [here](https://marcusg.me/bdf-pixel-editor/).
 
 ## .bdf Format
 The Glyph Bitmap Distribution format is an older font format that is largely unsupported now, replaced mainly by OpenType and TrueType. 
-Because this format is rarely used now, very few tools are still available to develop such fonts. This project offers one such tool
+Because this format is rarely used now, very few tools are still available to develop such fonts. However, this font format (and thus these tools) still has some use in low-level embedded systems, or any system that cannot support a high computational load. This project offers one such tool
 for a limited 16pt font, with a 16x16 bounding box. The global properties of the font this system creates are as follows.<br>
 
 STARTFONT 2.1<br>
@@ -43,7 +43,6 @@ doesn't return 2 bytes of binary or if there aren't 16 lines of hex per BITMAP.
 - Fonts cas be cleared and copied to your clipboard
 - Outside fonts can be imported
 - Glyphs can be completely cleared, remvoed one at a time, or added
-- System supports unicode
 
 ## Future Features
 - Customizable bounding box
