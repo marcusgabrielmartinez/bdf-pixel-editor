@@ -1,5 +1,6 @@
 # bdf-pixel-editor
-This is a visual pixel editor for .bdf files. It will let you create fonts where each glyph (character or symbol) is built pixel by pixel.
+This is a visual pixel editor for .bdf files. It will let you create fonts where each glyph (character or symbol) is built pixel by pixel.<br>
+See the system running [here](https://marcusg.me/bdf-pixel-editor/).
 
 ## .bdf Format
 The Glyph Bitmap Distribution format is an older font format that is largely unsupported now, replaced mainly by OpenType and TrueType. 
