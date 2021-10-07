@@ -47,6 +47,7 @@ doesn't return 2 bytes of binary or if there aren't 16 lines of hex per BITMAP.
 ## Future Features
 - Customizable bounding box
 - Automatically customized bounding box per glyph
+- Full unicode support
 
 ## Credits
 - [rpi-rgb-led-matrix](https://github.com/hzeller/rpi-rgb-led-matrix) was used to test exported fonts.
